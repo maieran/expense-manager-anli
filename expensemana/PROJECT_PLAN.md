@@ -7,8 +7,8 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
 
 ## 📅 Woche 1 – Auth & Projektstart
 
-- [ ] Monorepo `my-expense-platform` anlegen
-- [ ] Spring Boot App `apps/expense-core` initialisieren
+- [✅] Monorepo `my-expense-platform` anlegen
+- [✅] Spring Boot App `apps/expense-core` initialisieren
 - [ ] `User` + `Role` Entity erstellen
 - [ ] JWT-Authentifizierung implementieren
 - [ ] `/register`, `/login` Endpunkte
@@ -24,18 +24,18 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ### Projektstruktur nach apps/, docs/, design/, k8s/, scripts/ usw.
         === DETAILS ===
         => [✅] Lokales Verzeichnis mit git init
-        => [ ] .gitignore für Java, Python, Docker, k8s, GitHub CI/CD, Spring Boot, MacOs, Windows
-        => [ ] Erste Commit-Message: initial monorepo structure
+        => [✅] .gitignore für Java, Python, Docker, k8s, GitHub CI/CD, Spring Boot, MacOs, Windows
+        => [✅] Erste Commit-Message: initial monorepo structure
 
 ✅ 2. Spring Boot App apps/expense-core initialisieren
     ZIEL:
     ### Spring Boot-Projekt mit Maven aufsetzen
     === DETAILS ===
-        => [ ] Java 17
-        => [ ] Maven
-            ==> [ ] apps/expense-core als Maven-Projekt anlegen
-        => [ ] Abhängigkeiten: spring-boot-starter-web, spring-boot-starter-security, spring-boot-starter-data-jpa, jjwt, h2 oder mysql
-        => [ ] application.yml oder .properties einrichten
+        => [✅] Java 17
+        => [✅] Maven
+            ==> [✅] apps/expense-core als Maven-Projekt anlegen
+        => [✅] Abhängigkeiten: spring-boot-starter-web, spring-boot-starter-security, spring-boot-starter-data-jpa, jjwt, h2 oder mysql
+        => [✅] application.yml oder .properties einrichten
         => [ ] REST Controller testen mit /hello
 
 

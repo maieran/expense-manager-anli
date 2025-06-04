@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: expensemana
+  profiles:
+    active: dev
+
+---
+
+spring:
+  application:
+    name: expensemana
+  config:
+    activate:
+      on-profile: dev
+
+  server:
+    port: 8080
+    #servlet:
+    #  context-path: /dev-api
+
+  security:
+    user:
+      name: us
+      password: pp
+
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    username: sa
+    password: as
+    url: jdbc:h2:mem:expensemanadb
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  server:
+    port: 80
+    #servlet:
+    #  context-path: /prod-api
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/expensemanadb
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
