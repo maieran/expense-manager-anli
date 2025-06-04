@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ExpenseMana – Master Your Spending Energy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            orbitron: ['Orbitron', 'sans-serif'],
+          },
+          colors: {
+            primary: '#00c2ff',
+            dark: '#0a0a0a',
+            accent: '#ffd700',
+          },
+          animation: {
+            fade: 'fadeIn 2s ease-in-out',
+            'slide-up': 'slideUp 1s ease-out forwards',
+            float: 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              from: { opacity: 0 },
+              to: { opacity: 1 },
+            },
+            slideUp: {
+              '0%': { opacity: 0, transform: 'translateY(20px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-dark text-white font-sans">
+  <!-- Navbar -->
+  <header class="fixed w-full top-0 z-50 bg-dark/70 backdrop-blur-md border-b border-white/10">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <div class="text-2xl font-orbitron text-accent">⚡ ExpenseMana</div>
+      <nav class="space-x-6 hidden md:block">
+        <a href="#features" class="hover:text-primary">Features</a>
+        <a href="#subscribe" class="hover:text-primary">Subscribe</a>
+        <a href="#feedback" class="hover:text-primary">Feedback</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-28 bg-gradient-to-br from-dark to-[#151530] overflow-hidden">
+    <!-- Floating background circle -->
+    <div class="absolute top-36 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float z-0"></div>
+    <h1 class="relative z-10 text-5xl md:text-6xl font-orbitron mb-6 animate-fade">Master Your Spending Energy</h1>
+    <p class="relative z-10 text-xl max-w-2xl mb-6 animate-fade delay-200">
+      Track income and expenses—whether personal or shared. Join forces with family, roommates, or your team. Let AI handle receipts, build reports, and prepare you for tax season.
+    </p>
+    <a href="#subscribe" class="relative z-10 bg-primary text-black px-8 py-3 rounded-xl font-bold hover:bg-cyan-400 transition-transform transform hover:scale-105">Join Early Access</a>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-20 px-6 bg-black text-center">
+    <h2 class="text-4xl font-orbitron mb-12">🧠 Built for Conscious Spending</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 max-w-6xl mx-auto">
+      <div class="feature-card bg-white/5 border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition opacity-0">
+        <h3 class="text-xl text-accent mb-3">Expense Rituals</h3>
+        <p>Log daily, weekly, and monthly expenses with minimal effort. Build awareness through habit.</p>
+      </div>
+      <div class="feature-card bg-white/5 border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition opacity-0">
+        <h3 class="text-xl text-accent mb-3">Streaks & Badges</h3>
+        <p>Earn badges for consistent tracking and healthy decisions. Visualize your financial momentum.</p>
+      </div>
+      <div class="feature-card bg-white/5 border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition opacity-0">
+        <h3 class="text-xl text-accent mb-3">AI Guidance</h3>
+        <p>Smart prompts help you spot waste, optimize spending, and avoid burnout on subscriptions.</p>
+      </div>
+      <div class="feature-card bg-white/5 border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition opacity-0">
+        <h3 class="text-xl text-accent mb-3">📸 Smart Receipt AI</h3>
+        <p>Snap a photo of any receipt or payment record—our system auto-categorizes, adds it to tables, and supports export-ready summaries.</p>
+      </div>
+      <div class="feature-card bg-white/5 border border-white/10 rounded-xl p-6 shadow-lg hover:shadow-xl transition opacity-0">
+        <h3 class="text-xl text-accent mb-3">🤝 Shared Spaces</h3>
+        <p>Create spaces for families, roommates, or businesses to collaboratively track spending and income—with exportable reports for tax or accounting use.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="py-20 px-6 bg-[#0d0d0d] text-center text-white">
+    <h2 class="text-3xl md:text-4xl font-orbitron mb-8">🧰 Use Cases</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto text-left">
+      <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+        <h3 class="text-accent font-semibold mb-2">🧍 Personal Finance</h3>
+        <p>Track income, spending rituals, goals, and build habits that reinforce mindful money use.</p>
+      </div>
+      <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+        <h3 class="text-accent font-semibold mb-2">🏢 Business Reporting</h3>
+        <p>Team members upload receipts and AI calculates totals—submit polished reports to leadership with one click.</p>
+      </div>
+      <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+        <h3 class="text-accent font-semibold mb-2">🤖 Automated Data</h3>
+        <p>Our AI extracts data from photos, PDF scans, or email receipts and adds them to dynamic dashboards or CSV exports.</p>
+      </div>
+      <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+        <h3 class="text-accent font-semibold mb-2">👪 Families & Teams</h3>
+        <p>Track shared groceries, rent, or group expenses. Perfect for households, couples, or small teams with shared responsibilities.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subscribe -->
+  <section id="subscribe" class="py-20 px-6 bg-gradient-to-r from-[#111] to-[#1a1a2e] text-center">
+    <h2 class="text-3xl md:text-4xl font-orbitron mb-6">💌 Join Our Beta Circle</h2>
+    <p class="mb-8 text-lg max-w-xl mx-auto">Be among the first to access ExpenseMana. No spam. Just insights.</p>
+    <form class="flex flex-col sm:flex-row justify-center gap-4 max-w-xl mx-auto">
+      <input type="email" placeholder="Your email" class="px-6 py-3 rounded-md text-black w-full" required />
+      <button class="bg-accent text-black px-6 py-3 rounded-md font-semibold hover:bg-yellow-300 transition-transform transform hover:scale-105">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Feedback -->
+  <section id="feedback" class="py-20 px-6 bg-black text-center">
+    <h2 class="text-3xl md:text-4xl font-orbitron mb-6">🗣️ Your Voice Matters</h2>
+    <p class="mb-8 max-w-2xl mx-auto">Help shape the future of ExpenseMana. What would make this magical for your financial journey?</p>
+    <form class="max-w-xl mx-auto space-y-4">
+      <textarea placeholder="Your feedback..." rows="4" class="w-full p-4 rounded-md text-black"></textarea>
+      <button class="bg-primary text-black px-6 py-3 rounded-md font-bold hover:bg-cyan-400 transition-transform transform hover:scale-105">Send Feedback</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark border-t border-white/10 py-10 text-center text-sm text-white/60">
+    <p>&copy; 2025 ExpenseMana. Made with intention.</p>
+  </footer>
+
+  <!-- Scroll Reveal Script -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-slide-up');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.feature-card').forEach(card => {
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>
