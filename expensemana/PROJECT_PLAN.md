@@ -36,7 +36,7 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
             ==> [✅] apps/expense-core als Maven-Projekt anlegen
         => [✅] Abhängigkeiten: spring-boot-starter-web, spring-boot-starter-security, spring-boot-starter-data-jpa, jjwt, h2 oder mysql
         => [✅] application.yml oder .properties einrichten
-        => [ ] REST Controller testen mit /hello
+        => [✅] REST Controller testen mit /hello
 
 
  ✅ 3. User + Role Entity erstellen
@@ -113,6 +113,8 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
 
 - [ ] Entity: `UserBadge`, Enum `BadgeType`
 - [ ] Logik: Erste Ausgabe
+- [ ] Logik: 2-Tage-Streak
+- [ ] Logik: 4-Tage-Streak
 - [ ] Logik: 7-Tage-Streak
 - [ ] `BadgeService.evaluate(userId)`
 - [ ] Trigger bei neuem ExpenseEntry
