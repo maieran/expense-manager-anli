@@ -23,7 +23,6 @@ spring:
       name: us
       password: pp
 
-
   h2:
     console:
       enabled: true
@@ -36,6 +35,20 @@ spring:
 
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+  integration:
+    management:
+      default-logging-enabled: true
+#debug: true # debug aktiviert
+
+logging:
+  level:
+    #root: DEBUG
+    #org.springframework.web: DEBUG
+    #com.dein.package: DEBUG
+    #com.anli.expensemana: DEBUG
+    org.springframework.security: DEBUG
+
+
 
 ---
 

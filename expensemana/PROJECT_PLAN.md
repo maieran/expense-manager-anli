@@ -44,8 +44,8 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ### Benutzer und Rollenmodell anlegen
     === DETAILS ===
         => [ ] Implementation:
-            ==> [ ] Entities + JPA-Annotations definieren
-            ==> [ ] UserRepository + RoleRepository
+            ==> [✅] Entities + JPA-Annotations definieren
+            ==> [✅] UserRepository + RoleRepository
             ==> [ ] Service für Registrierung + Speicherung
 
  ✅ 4. JWT-Authentifizierung implementieren
