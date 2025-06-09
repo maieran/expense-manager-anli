@@ -2,12 +2,14 @@ package com.anli.expensemana.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+//TODO: Concfigure it for the production-level later
 public class ExpenseManaSecurityConfig {
 
     /**
@@ -31,22 +33,15 @@ public class ExpenseManaSecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/user/signup").permitAll()
+                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/logout").authenticated()
+                        .requestMatchers("/user/**").authenticated()
                         .anyRequest().authenticated()
                 )
-                .formLogin(); // ← Form-basiertes Login aktiviert
-        return http.build();
-
-        /**
-        http
-                .csrf().disable()
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/signup", "/user/login").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .formLogin().disable();
-                //.httpBasic().disable();  // <--- Das hier entfernen oder deaktivieren
+                .formLogin().disable()
+                .httpBasic().disable();
 
         return http.build();
-        */
+
     }
 }

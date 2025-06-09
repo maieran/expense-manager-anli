@@ -9,9 +9,9 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
 
 - [✅] Monorepo `my-expense-platform` anlegen
 - [✅] Spring Boot App `apps/expense-core` initialisieren
-- [ ] `User` + `Role` Entity erstellen
+- [✅] `User` + `Role` Entity erstellen
 - [ ] JWT-Authentifizierung implementieren
-- [ ] `/register`, `/login` Endpunkte
+- [✅] `/register`, `/login` Endpunkte
 - [ ] Auth-Middleware für geschützte Endpunkte (`@PreAuthorize`)
 - [ ] Swagger/OpenAPI aktivieren
 - [ ] Unit Tests für Auth schreiben
@@ -46,7 +46,7 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
         => [ ] Implementation:
             ==> [✅] Entities + JPA-Annotations definieren
             ==> [✅] UserRepository + RoleRepository
-            ==> [ ] Service für Registrierung + Speicherung
+            ==> [✅] Service für Registrierung + Speicherung
 
  ✅ 4. JWT-Authentifizierung implementieren
     ZIEL:
@@ -56,7 +56,7 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ### Token enthält username, roles, exp
     === DETAILS ===
     => [ ] Implementation:
-        ==> [ ] LoginController: /login
+        ==> [ ] LoginController: /login ==> verwenden stattdessen einen UserController, der login und signup enthält
         ==> [ ] JWT-Generator + JWT-Validator Service
         ==> [ ] Token im Header Authorization: Bearer <token> zurückgeben
 
@@ -66,7 +66,7 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ### Benutzer können sich registrieren und einloggen
     === DETAILS ===
     => [ ] Implementation: 
-        ==> [ ] DTOs erstellen
+        ==> [✅] DTOs erstellen
         ==> [ ] Registrierung speichert User + Rolle "USER"
         ==> [ ] Login prüft Passwort (BCrypt) + gibt JWT zurück
 

@@ -1,7 +1,9 @@
 package com.anli.expensemana.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -20,11 +22,10 @@ public class User extends BaseEntity {
     private String email;
     @Column(nullable = false)
     private String password;
+    @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL)
+    private final Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(targetEntity = Role.class)
-    private Set<Role> roles;
-
-    public User(String username, String firstName, String middleName, String lastName, String email, String password) {
+    public User(String username, String firstName, String middleName, String lastName, String email, String password, String role) {
         super();
         this.username = username;
         this.firstName = firstName;
@@ -32,6 +33,7 @@ public class User extends BaseEntity {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.getRoles().add(new Role(role));
     }
 
     public User() {
