@@ -63,7 +63,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                     userInput.getLastName(),
                     userInput.getEmail(),
                     userInput.getPassword(),
-                    userInput.getRole());
+                    userInput.getRole()//todo: later it should be switchable between system_admin, group_admin, user and etc.
+            );
             userRepository.save(newUser);
             return newUser;
         }
@@ -83,7 +84,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public Boolean logoutUser() {
         SecurityContextHolder.clearContext();
-        return SecurityContextHolder.getContext() == null;
+        return true;
     }
+
 
 }

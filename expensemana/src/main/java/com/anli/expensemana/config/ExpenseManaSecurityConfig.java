@@ -7,24 +7,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 //TODO: Concfigure it for the production-level later
 public class ExpenseManaSecurityConfig {
-
-    /**
-     *  In case I need more configurations, I leave this code snippet here.
-     */
-/*     public SecurityFilterChain SecurityChainFilter (HttpSecurity http) throws Exception {
-       http
-                .csrf(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
-                .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated());
-                //.addFilterAfter(new OwnFilter(), AnonymousAuthenticationFilter.class);
-
-        return http.build();
-    } */
 
 
     @Bean
@@ -32,16 +20,12 @@ public class ExpenseManaSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/signup").permitAll()
-                        .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers("/auth/logout").authenticated()
-                        .requestMatchers("/user/**").authenticated()
+                        .requestMatchers("/user/signup", "/auth/login", "/auth/logout").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin().disable()
-                .httpBasic().disable();
+                .formLogin();
+                //.httpBasic().disable();
 
         return http.build();
-
     }
 }

@@ -5,6 +5,7 @@ import com.anli.expensemana.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * This class controls users' authentication and session to the platform.
  */
+//see: https://medium.com/@villysiu/java-springboot-signup-login-rest-api-d01b21759ba9
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -40,13 +42,12 @@ public class AuthController {
 
     @PostMapping("/logout")
     public ResponseEntity<String> logoutUser(HttpServletRequest request) {
-        //if (SecurityContextHolder.getContext().getAuthentication() != null) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
             request.getSession().invalidate(); //kills user session
-            boolean isUserLoggedOut = userService.logoutUser(); //clears security context
-            if (isUserLoggedOut) {
-                return ResponseEntity.ok("Login successful");
-            }
-        //}
+            userService.logoutUser(); //clears security context
+            return ResponseEntity.ok("Logout successful.");
+        }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not logged in.");
     }
 }
