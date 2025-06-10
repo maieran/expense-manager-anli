@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * This class controls users' authentication and session to the platform.
  */
 //see: https://medium.com/@villysiu/java-springboot-signup-login-rest-api-d01b21759ba9
+//TODO: JWT-Extension + E-mail reset -> https://dev.to/mspilari/login-system-with-jwt-token-and-email-reset-password-571
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

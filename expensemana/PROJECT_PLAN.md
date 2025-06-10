@@ -56,7 +56,7 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ### Token enthält username, roles, exp
     === DETAILS ===
     => [ ] Implementation:
-        ==> [ ] LoginController: /login ==> verwenden stattdessen einen UserController, der login und signup enthält
+        ==> [✅] LoginController: /login ==> verwenden stattdessen einen UserController, der login und signup enthält
         ==> [ ] JWT-Generator + JWT-Validator Service
         ==> [ ] Token im Header Authorization: Bearer <token> zurückgeben
 
@@ -67,7 +67,7 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     === DETAILS ===
     => [ ] Implementation: 
         ==> [✅] DTOs erstellen
-        ==> [ ] Registrierung speichert User + Rolle "USER"
+        ==> [✅] Registrierung speichert User + Rolle "USER"
         ==> [ ] Login prüft Passwort (BCrypt) + gibt JWT zurück
 
  ✅ 6. Auth-Middleware für geschützte Endpunkte
