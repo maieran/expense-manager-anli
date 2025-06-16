@@ -22,6 +22,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 //TODO: Concfigure it for the production-level later
+//TODO: https://medium.com/@victoronu/implementing-jwt-authentication-in-a-simple-spring-boot-application-with-java-b3135dbdb17b
 public class ExpenseManaSecurityConfig {
 
 
