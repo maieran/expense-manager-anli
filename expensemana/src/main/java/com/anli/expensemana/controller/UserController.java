@@ -4,6 +4,7 @@ import com.anli.expensemana.model.DTO.LoginDTO;
 import com.anli.expensemana.model.DTO.SignUpDTO;
 import com.anli.expensemana.model.User;
 import com.anli.expensemana.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "SignUp", description = "Handles user SignUp")
 public class UserController {
 
     private final UserService userService;

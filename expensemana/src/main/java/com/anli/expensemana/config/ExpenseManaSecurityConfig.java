@@ -44,14 +44,22 @@ public class ExpenseManaSecurityConfig {
 //                .formLogin();
 
                 .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/user/signup", "/auth/login",
+                                "/v3/api-docs/**",
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                )
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling
                                 .authenticationEntryPoint(restAuthenticationEntryPoint)
                 )
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/signup", "/auth/login").permitAll()
-                        .anyRequest().authenticated()
-                )
+
                 .logout(logout -> logout
                         .logoutUrl("/auth/logout")
                         .logoutSuccessHandler((req, res, auth) -> res.setStatus(200))

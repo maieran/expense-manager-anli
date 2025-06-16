@@ -2,6 +2,7 @@ package com.anli.expensemana.controller;
 
 import com.anli.expensemana.model.DTO.LoginDTO;
 import com.anli.expensemana.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 //TODO: JWT-Extension + E-mail reset -> https://dev.to/mspilari/login-system-with-jwt-token-and-email-reset-password-571
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Authentication", description = "Handles user login and logout")
 public class AuthController {
 
     private final UserService userService;

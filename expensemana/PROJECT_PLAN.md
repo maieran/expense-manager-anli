@@ -83,9 +83,9 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ZIEL:
     ### REST-API dokumentieren & testen
     === DETAILS ===
-    => [ ] Implementation:
-        ==> [ ] springdoc-openapi-ui in pom.xml aufnehmen
-        ==> [ ]  Swagger unter /swagger-ui.html erreichbar machen
+    => [✅] Implementation:
+        ==> [✅] springdoc-openapi-ui in pom.xml aufnehmen
+        ==> [✅]  Swagger unter /swagger-ui.html erreichbar machen
 
 
 
