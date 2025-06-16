@@ -74,7 +74,7 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ZIEL:
     ### Nur authentifizierte Nutzer dürfen auf geschützte Routen zugreifen
     === DETAILS ===
-    => [ ] Verwende OncePerRequestFilter oder AuthenticationProvider
+    => [✅] Verwende OncePerRequestFilter oder AuthenticationProvider
         ==> [ ] JWT auslesen, validieren
         ==> [ ] SecurityConfig.java: Zugriff auf /api/** nur mit Auth
         ==> [ ] @PreAuthorize("hasRole('USER')") einsetzen

@@ -4,52 +4,43 @@ import com.anli.expensemana.model.DTO.LoginDTO;
 import com.anli.expensemana.model.DTO.SignUpDTO;
 import com.anli.expensemana.model.User;
 import com.anli.expensemana.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 
 //TODO: Ersetzt den UserRepository im UserController, da hier mehr Business
 @Service
-public class UserServiceImpl implements UserDetailsService, UserService {
+public class UserServiceImpl implements UserService {
 
-    @Autowired
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    private final SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+
+    public UserServiceImpl(UserRepository userRepository,
+                           PasswordEncoder passwordEncoder,
+                           AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
-    }
-
-    /**
-     * Overriden by using email instead of username to login the user into ExpenseMana platform.
-     * @param email
-     * @return
-     */
-    @Override
-    public UserDetails loadUserByUsername(String email) {
-        User user = userRepository.findByEmail(email).orElseThrow(() ->
-                new UsernameNotFoundException(email + " not found"));
-
-        Set<GrantedAuthority> authorizations = user.
-                getRoles()
-                .stream()
-                .map((role) -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
-
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                authorizations
-        );
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -62,7 +53,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                     userInput.getMiddleName(),
                     userInput.getLastName(),
                     userInput.getEmail(),
-                    userInput.getPassword(),
+                    passwordEncoder.encode(userInput.getPassword()), //userInput.getPassword()
                     userInput.getRole()//todo: later it should be switchable between system_admin, group_admin, user and etc.
             );
             userRepository.save(newUser);
@@ -72,19 +63,44 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public Boolean loginUser(LoginDTO userInput) {
-        Optional<User> userOptional = userRepository.findByEmail(userInput.getEmail());
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            return Objects.equals(userInput.getPassword(), user.getPassword());
+    public String loginUser(LoginDTO userInput, HttpServletRequest request) {
+        try {
+            Authentication authenticationRequest = UsernamePasswordAuthenticationToken.unauthenticated(
+                    userInput.getEmail(), userInput.getPassword());
+            Authentication authenticationResponse = authenticationManager.authenticate(authenticationRequest);
+
+            SecurityContextHolder.getContext().setAuthentication(authenticationResponse);
+            request.getSession().setAttribute("SIMPLE_SECURITY_TOKEN", SecurityContextHolder.getContext());
+
+            return "Logged in successfully";
+        } catch (BadCredentialsException | UsernameNotFoundException e) {
+            throw e; // controller fängt es ab
         }
-        return false;
+//        Optional<User> userOptional = userRepository.findByEmail(userInput.getEmail());
+//        if (userOptional.isPresent()) {
+//            User user = userOptional.get();
+//            return Objects.equals(passwordEncoder.encode(userInput.getPassword()), user.getPassword());
+//        }
+//        return false;
     }
 
+//    @Override
+//    public Boolean logoutUser() {
+//        SecurityContextHolder.clearContext();
+//        return true;
+//    }
     @Override
-    public Boolean logoutUser() {
-        SecurityContextHolder.clearContext();
-        return true;
+    public String logoutUser(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            request.getSession().removeAttribute("SIMPLE_SECURITY_TOKEN");
+            request.getSession().invalidate();
+            SecurityContextHolder.clearContext();
+            return new String("Logged out successfully");
+        }
+
+        return new String("Not authorized");
+
     }
 
 
