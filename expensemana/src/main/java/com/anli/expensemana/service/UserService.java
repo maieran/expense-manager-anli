@@ -1,5 +1,6 @@
 package com.anli.expensemana.service;
 
+import com.anli.expensemana.model.DTO.JwtResponseDTO;
 import com.anli.expensemana.model.DTO.LoginDTO;
 import com.anli.expensemana.model.DTO.SignUpDTO;
 import com.anli.expensemana.model.User;
@@ -11,7 +12,8 @@ public interface UserService {
     User signUp(SignUpDTO userInput);
     //Boolean loginUser(LoginDTO userInput);
 
-    String loginUser(LoginDTO userInput, HttpServletRequest request);
+    /* String loginUser(LoginDTO userInput, HttpServletRequest request); */
+    JwtResponseDTO loginUser(LoginDTO userInput,HttpServletRequest request);
     String logoutUser(HttpServletRequest request, HttpServletResponse response, Authentication authentication);
     //Boolean logoutUser();
 }

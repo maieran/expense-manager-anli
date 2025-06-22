@@ -1,8 +1,5 @@
 package com.anli.expensemana.service;
 
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -15,14 +12,8 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.*;
-import org.springframework.security.core.*;
-import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
+
 @Component
 public class JwtService {
 
@@ -48,17 +39,33 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-//    public String extractUsername(String token) {
-//        return extractClaim(token, Claims::getSubject);
-//    }
-//
-//    private <T> T extractClaim(String token, Object getSubject) {
-//        final Claims claims = extractAllClaims(token);
-//        return claimsResolver.apply(claims);
-//    }
-//
-//    private Claims extractAllClaims(String token) {
-//        return Jwts.parser().build().set
-//    }
+    public String extractEmail(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    private Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extraAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Claims extraAllClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(getSignKey()).build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    private Boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
+    public Boolean validateToken(String token, UserDetails userDetails) {
+        final String userEmail = extractEmail(token);
+        return (userEmail.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
 
 }

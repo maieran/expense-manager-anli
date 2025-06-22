@@ -1,5 +1,6 @@
 package com.anli.expensemana.controller;
 
+import com.anli.expensemana.model.DTO.JwtResponseDTO;
 import com.anli.expensemana.model.DTO.LoginDTO;
 import com.anli.expensemana.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -7,10 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +30,7 @@ public class AuthController {
         this.userService = userService;
     }
 
+    /*
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody LoginDTO userRequest, HttpServletRequest request) {
         try {
@@ -42,21 +41,15 @@ public class AuthController {
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unexpected error occurred.");
         }
+    } */
 
 
-//        try {
-//            String isAuthenticated = userService.loginUser(userRequest, request);
-//            return new ResponseEntity<>(isAuthenticated, HttpStatus.OK);
-//
-////            if (isAuthenticated) {
-////                return ResponseEntity.ok(true);
-////            } else {
-////                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-////            }
-//        } catch (Exception ex) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
+        JwtResponseDTO response = userService.loginUser(loginDTO, request);
+        return ResponseEntity.ok(response.getToken()); // <-- NUR der String
     }
+
 
     @PostMapping("/logout")
     public ResponseEntity<?> logoutUser(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
@@ -73,4 +66,6 @@ public class AuthController {
 //        }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not logged in.");
     }
+
+
 }
