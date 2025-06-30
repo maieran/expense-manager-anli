@@ -65,10 +65,10 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ZIEL:
     ### Benutzer können sich registrieren und einloggen
     === DETAILS ===
-    => [ ] Implementation: 
+    => [✅] Implementation: 
         ==> [✅] DTOs erstellen
         ==> [✅] Registrierung speichert User + Rolle "USER"
-        ==> [✅] Login prüft Passwort (BCrypt) + [↩️] gibt JWT zurück
+        ==> [✅] Login prüft Passwort (BCrypt) + [✅] gibt JWT zurück
 
  ✅ 6. Auth-Middleware für geschützte Endpunkte
     ZIEL:
@@ -91,9 +91,9 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
 
  📦📦📦 Output dieser Woche 📦📦📦
     📦 Authentifizierung (JWT-basiert)
-    📦 Register/Login-Flow
+    📦 Register/Login-Flow ✅
     📦 Swagger zum Testen
-    📦 Monorepo-Grundlage + saubere Paketstruktur
+    📦 Monorepo-Grundlage + saubere Paketstruktur ✅
     📦 Code in GitHub + CI-Testlauf (optional)
     
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -102,10 +102,83 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
 
 - [ ] `ExpenseEntry`, `Product`, `Reoccurrence` Entities
 - [ ] POST `/api/expenses` (authentifiziert)
+- [↩️] POST `/api/expenses` (JWT-authentifiziert)
 - [ ] GET `/api/expenses/{userId}?range=daily|monthly`
 - [ ] Filter & Aggregation (Summen pro Kategorie)
 - [ ] Error Handling mit `@ControllerAdvice`
 - [ ] Integrationstest für Einträge & Abfragen
+
+
+### REQUIREMENTS - WOCHE 2
+✅ 1. Datenmodell: ExpenseEntry, Product, Reoccurrence (JPA-Entities)
+    ZIEL:
+    ### Entities mit JPA-Annotationen definieren
+    ### ExpenseEntryRepository, ProductRepository, ReoccurrenceRepository
+    ### Datenbanktabellen per JPA generieren lassen (DDL auto)
+    === DETAILS ===
+        => [] Implementation
+
+✅ 2. POST /api/expenses – Authentifiziert
+    - Controller POST /api/expenses
+   ZIEL:
+    Erlaube registrierten Benutzern, neue Expense-Einträge zu speichern.
+    -- JWT (SPÄTER) 🔒 Voraussetzung: JWT Auth aktiv, @PreAuthorize("hasRole('USER')") --
+   ### DTO → Entity Mapping
+   ### Authenticated User ID miterfassen (@AuthenticationPrincipal)
+   ### Persistieren über Service Layer
+   ### Rückgabe: 201 Created + gespeicherte Entry-ID
+   === DETAILS ===
+    => [] Implementation
+
+✅ 3. GET /api/expenses/{userId}?range=daily|monthly
+    ZIEL:
+    Hole Ausgaben eines Users, gefiltert nach Zeitraum (heutiger Tag, aktueller Monat)
+    Authentifizierung notwendig (nur eigener User)
+    Query-Param range auswerten
+    ### Controller GET-Methode
+    ### Abfrage nach UserId und Zeitraum (LocalDate.now(), YearMonth)
+    ### Optional: Validierung des range-Parameters
+
+✅ 4. Filter & Aggregation – Summen pro Kategorie
+    Ziel:
+    Berechne Summen für jeden Produkttyp (z.B "Food" → 65.80")
+    ### Neue Route /api/expenses/aggregate/{userId}?range=monthly
+    ### Grouping nach product.type
+    ### Rückgabe als Map<String, BigDecimal>
+    ### Unit-Test der Aggregationslogik im Service
+
+✅ 5. Fehlerbehandlung mit @ControllerAdvice
+    ZIEL:
+    --- Nicht gefundene User oder Entries
+    --- Ungültige Eingaben
+    --- Zugriff auf fremde Daten
+    ### GlobalExceptionHandler erstellen mit @ControllerAdvice
+    ### Fehlerklassen: NotFoundException, UnauthorizedAccessException
+    ### Einheitliche Response-Struktur für Fehler:
+
+✅ 6. Integrationstests für Einträge & Abfragen
+    ZIEL:
+    --- Teste den vollständigen Ablauf von Auth → POST → GET
+    ### Mit Testcontainers: H2 oder MySQL starten
+    ### Authentifizierten POST ausführen
+    ### GET mit validem und invalidem range
+    ### GET Aggregation aufrufen
+    ### Cleanup nach jedem Test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
