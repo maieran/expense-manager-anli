@@ -10,10 +10,10 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
 - [✅] Monorepo `my-expense-platform` anlegen
 - [✅] Spring Boot App `apps/expense-core` initialisieren
 - [✅] `User` + `Role` Entity erstellen
-- [ ] JWT-Authentifizierung implementieren
+- [↩️] JWT-Authentifizierung implementieren
 - [✅] `/register`, `/login` Endpunkte
-- [ ] Auth-Middleware für geschützte Endpunkte (`@PreAuthorize`)
-- [ ] Swagger/OpenAPI aktivieren
+- [↩️] Auth-Middleware für geschützte Endpunkte (`@PreAuthorize`)
+- [✅] Swagger/OpenAPI aktivieren
 - [ ] Unit Tests für Auth schreiben
 
 
@@ -43,7 +43,7 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ZIEL:
     ### Benutzer und Rollenmodell anlegen
     === DETAILS ===
-        => [ ] Implementation:
+        => [✅] Implementation:
             ==> [✅] Entities + JPA-Annotations definieren
             ==> [✅] UserRepository + RoleRepository
             ==> [✅] Service für Registrierung + Speicherung
@@ -55,10 +55,10 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ### Verwende io.jsonwebtoken:jjwt
     ### Token enthält username, roles, exp
     === DETAILS ===
-    => [ ] Implementation:
+    => [↩️] Implementation:
         ==> [✅] LoginController: /login ==> verwenden stattdessen einen UserController, der login und signup enthält
-        ==> [ ] JWT-Generator + JWT-Validator Service
-        ==> [ ] Token im Header Authorization: Bearer <token> zurückgeben
+        ==> [↩️] JWT-Generator + JWT-Validator Service
+        ==> [↩️] Token im Header Authorization: Bearer <token> zurückgeben
 
 
  ✅ 5. /register, /login Endpunkte
@@ -68,16 +68,16 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     => [ ] Implementation: 
         ==> [✅] DTOs erstellen
         ==> [✅] Registrierung speichert User + Rolle "USER"
-        ==> [ ] Login prüft Passwort (BCrypt) + gibt JWT zurück
+        ==> [✅] Login prüft Passwort (BCrypt) + [↩️] gibt JWT zurück
 
  ✅ 6. Auth-Middleware für geschützte Endpunkte
     ZIEL:
     ### Nur authentifizierte Nutzer dürfen auf geschützte Routen zugreifen
     === DETAILS ===
     => [✅] Verwende OncePerRequestFilter oder AuthenticationProvider
-        ==> [ ] JWT auslesen, validieren
-        ==> [ ] SecurityConfig.java: Zugriff auf /api/** nur mit Auth
-        ==> [ ] @PreAuthorize("hasRole('USER')") einsetzen
+        ==> [↩️] JWT auslesen, validieren
+        ==> [↩️] SecurityConfig.java: Zugriff auf /api/** nur mit Auth
+        ==> [↩️] @PreAuthorize("hasRole('USER')") einsetzen
 
  ✅ 7. Swagger/OpenAPI aktivieren
     ZIEL:
