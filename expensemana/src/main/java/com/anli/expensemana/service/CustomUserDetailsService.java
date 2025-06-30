@@ -1,7 +1,7 @@
 package com.anli.expensemana.service;
 
-import com.anli.expensemana.model.User;
-import com.anli.expensemana.repository.UserRepository;
+import com.anli.expensemana.model.user.User;
+import com.anli.expensemana.repository.user.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;

@@ -2,27 +2,19 @@ package com.anli.expensemana.service;
 
 import com.anli.expensemana.model.DTO.LoginDTO;
 import com.anli.expensemana.model.DTO.SignUpDTO;
-import com.anli.expensemana.model.User;
-import com.anli.expensemana.repository.UserRepository;
+import com.anli.expensemana.model.user.User;
+import com.anli.expensemana.repository.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 
 //TODO: Ersetzt den UserRepository im UserController, da hier mehr Business

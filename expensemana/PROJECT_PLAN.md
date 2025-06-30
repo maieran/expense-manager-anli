@@ -116,7 +116,7 @@ Ein strukturierter Lernplan für dein Portfolio-Projekt mit wachsender Komplexit
     ### ExpenseEntryRepository, ProductRepository, ReoccurrenceRepository
     ### Datenbanktabellen per JPA generieren lassen (DDL auto)
     === DETAILS ===
-        => [] Implementation
+        => [✅] Implementation
 
 ✅ 2. POST /api/expenses – Authentifiziert
     - Controller POST /api/expenses

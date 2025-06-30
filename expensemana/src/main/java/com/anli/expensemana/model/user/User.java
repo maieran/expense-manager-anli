@@ -1,7 +1,6 @@
-package com.anli.expensemana.model;
+package com.anli.expensemana.model.user;
 
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 
 import java.util.HashSet;
 import java.util.Set;

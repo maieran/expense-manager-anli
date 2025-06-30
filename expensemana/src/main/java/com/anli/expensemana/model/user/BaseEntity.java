@@ -1,4 +1,4 @@
-package com.anli.expensemana.model;
+package com.anli.expensemana.model.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

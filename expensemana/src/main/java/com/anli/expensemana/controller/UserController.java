@@ -1,8 +1,7 @@
 package com.anli.expensemana.controller;
 
-import com.anli.expensemana.model.DTO.LoginDTO;
 import com.anli.expensemana.model.DTO.SignUpDTO;
-import com.anli.expensemana.model.User;
+import com.anli.expensemana.model.user.User;
 import com.anli.expensemana.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;

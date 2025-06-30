@@ -1,6 +1,6 @@
-package com.anli.expensemana.repository;
+package com.anli.expensemana.repository.user;
 
-import com.anli.expensemana.model.Role;
+import com.anli.expensemana.model.user.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

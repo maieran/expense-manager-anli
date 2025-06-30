@@ -2,7 +2,7 @@ package com.anli.expensemana.service;
 
 import com.anli.expensemana.model.DTO.LoginDTO;
 import com.anli.expensemana.model.DTO.SignUpDTO;
-import com.anli.expensemana.model.User;
+import com.anli.expensemana.model.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
