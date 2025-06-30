@@ -1,5 +1,6 @@
 package com.anli.expensemana.service;
 
+import com.anli.expensemana.config.JwtService;
 import com.anli.expensemana.model.DTO.LoginDTO;
 import com.anli.expensemana.model.DTO.SignUpDTO;
 import com.anli.expensemana.model.User;
@@ -32,15 +33,18 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtService jwtService;
 
     private final SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
-                           AuthenticationManager authenticationManager) {
+                           AuthenticationManager authenticationManager, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -64,31 +68,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String loginUser(LoginDTO userInput, HttpServletRequest request) {
-        try {
-            Authentication authenticationRequest = UsernamePasswordAuthenticationToken.unauthenticated(
-                    userInput.getEmail(), userInput.getPassword());
-            Authentication authenticationResponse = authenticationManager.authenticate(authenticationRequest);
+        Authentication authRequest = UsernamePasswordAuthenticationToken
+                .unauthenticated(userInput.getEmail(), userInput.getPassword());
 
-            SecurityContextHolder.getContext().setAuthentication(authenticationResponse);
-            request.getSession().setAttribute("SIMPLE_SECURITY_TOKEN", SecurityContextHolder.getContext());
+        Authentication authResponse = authenticationManager.authenticate(authRequest);
+        SecurityContextHolder.getContext().setAuthentication(authResponse);
 
-            return "Logged in successfully";
-        } catch (BadCredentialsException | UsernameNotFoundException e) {
-            throw e; // controller fängt es ab
-        }
-//        Optional<User> userOptional = userRepository.findByEmail(userInput.getEmail());
-//        if (userOptional.isPresent()) {
-//            User user = userOptional.get();
-//            return Objects.equals(passwordEncoder.encode(userInput.getPassword()), user.getPassword());
-//        }
-//        return false;
+        UserDetails userDetails = (UserDetails) authResponse.getPrincipal();
+        return jwtService.generateToken(userDetails.getUsername()); // ✅ Hier Email (Subject) übergeben
     }
 
-//    @Override
-//    public Boolean logoutUser() {
-//        SecurityContextHolder.clearContext();
-//        return true;
-//    }
+
     @Override
     public String logoutUser(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         //Authentication auth = SecurityContextHolder.getContext().getAuthentication();

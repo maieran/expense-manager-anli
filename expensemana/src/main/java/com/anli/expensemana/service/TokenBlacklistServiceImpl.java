@@ -1,0 +1,21 @@
+package com.anli.expensemana.service;
+
+
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Service
+public class TokenBlacklistServiceImpl implements TokenBlacklistService {
+
+    private final Set<String> blacklistedTokens = new HashSet<>();
+
+    public void blacklist(String token) {
+        blacklistedTokens.add(token);
+    }
+
+    public boolean isBlacklisted(String token) {
+        return blacklistedTokens.contains(token);
+    }
+}
