@@ -111,19 +111,30 @@ public class UserServiceImpl implements UserService {
 //        SecurityContextHolder.clearContext();
 //        return true;
 //    }
+//    @Override
+//    public String logoutUser(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+//        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication != null && authentication.isAuthenticated()) {
+//            request.getSession().removeAttribute("SIMPLE_SECURITY_TOKEN");
+//            request.getSession().invalidate();
+//            SecurityContextHolder.clearContext();
+//            return new String("Logged out successfully");
+//        }
+//
+//        return new String("Not authorized");
+//
+//    }
+
     @Override
     public String logoutUser(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
-            request.getSession().removeAttribute("SIMPLE_SECURITY_TOKEN");
             request.getSession().invalidate();
             SecurityContextHolder.clearContext();
-            return new String("Logged out successfully");
+            return "Logged out successfully";
         }
-
-        return new String("Not authorized");
-
+        return "Not authorized";
     }
+
 
 
 }

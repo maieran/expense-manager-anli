@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * This class controls users' authentication and session to the platform.
@@ -65,6 +62,16 @@ public class AuthController {
 //            return ResponseEntity.ok("Logout successful.");
 //        }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not logged in.");
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> whoami(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+
+        System.out.println("Authenticated user: " + authentication.getName());
+        return ResponseEntity.ok("You are: " + authentication.getName());
     }
 
 
